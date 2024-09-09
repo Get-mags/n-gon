@@ -299,7 +299,7 @@ const tech = {
         if (tech.isRerollDamage) dmg *= 1 + Math.max(0, 0.05 * powerUps.research.count)
         if (tech.isBotDamage) dmg *= 1 + 0.04 * b.totalBots()
         if (tech.restDamage > 1 && player.speed < 1) dmg *= tech.restDamage
-        if (tech.isLowEnergyDamage) dmg *= 1 + 0.5 * Math.max(0, m.maxEnergy - m.energy)
+        if (tech.isLowEnergyDamage) dmg *= 1 + 0.5 * Math.max(0, m.maxEnergy + m.energy)
         if (tech.energyDamage) dmg *= 1 + m.energy * 0.23 * tech.energyDamage;
         if (tech.isDamageFromBulletCount) dmg *= 1 + bullet.length * 0.01
         if (tech.isNoFireDamage && m.cycle > m.fireCDcycle + 120) dmg *= 2
@@ -308,7 +308,7 @@ const tech = {
         if (tech.isHarmDamage && m.lastHarmCycle + 480 > m.cycle) dmg *= 3;
         if (tech.lastHitDamage && m.lastHit) dmg *= 1 + tech.lastHitDamage * m.lastHit
         // if (tech.isLowHealthDmg) dmg *= 1 + 0.6 * Math.max(0, 1 - (tech.isEnergyHealth ? m.energy : m.health))
-        if (tech.isLowHealthDmg) dmg *= 1 + 0.6 * Math.max(0, (tech.isEnergyHealth ? m.maxEnergy - m.energy : m.maxHealth - m.health))
+        if (tech.isLowHealthDmg) dmg *= 1 + 0.6 * Math.max(0, (tech.isEnergyHealth ? m.maxEnergy + m.energy : m.maxHealth - m.health))
         if (tech.isJunkDNA) dmg *= 1 + 2 * (tech.junkChance + level.junkAdded)
         return dmg
     },
@@ -2867,7 +2867,7 @@ const tech = {
     {
         name: "Gibbs free energy",
         descriptionFunction() {
-            return `<strong>1.005x</strong> <strong class='color-d'>damage</strong> for each missing <strong class='color-f'>energy</strong><br><em style ="float: right;">(${(1 + 0.5 * Math.max(0, m.maxEnergy - m.energy)).toFixed(2)}x)</em>`
+            return `<strong>1.005x</strong> <strong class='color-d'>damage</strong> for each missing <strong class='color-f'>energy</strong><br><em style ="float: right;">(${(1 + 0.5 * Math.max(0, m.maxEnergy + m.energy)).toFixed(2)}x)</em>`
         },
         maxCount: 1,
         count: 0,
@@ -3141,7 +3141,7 @@ const tech = {
     {
         name: "negative feedback",
         descriptionFunction() {
-            return `<strong>1.006x</strong> <strong class='color-d'>damage</strong> for each missing ${tech.isEnergyHealth ? "<strong class='color-f'>energy</strong>" : "<strong class='color-h'>health</strong>"}<br><em style ="float: right;">(${(1 + 0.6 * Math.max(0, (tech.isEnergyHealth ? m.maxEnergy - m.energy : m.maxHealth - m.health))).toFixed(2)}x)</em>` //1 + 0.6 * Math.max(0, (tech.isEnergyHealth ? m.maxEnergy - m.energy : m.maxHealth - m.health))
+            return `<strong>1.006x</strong> <strong class='color-d'>damage</strong> for each missing ${tech.isEnergyHealth ? "<strong class='color-f'>energy</strong>" : "<strong class='color-h'>health</strong>"}<br><em style ="float: right;">(${(1 + 0.6 * Math.max(0, (tech.isEnergyHealth ? m.maxEnergy + m.energy : m.maxHealth - m.health))).toFixed(2)}x)</em>` //1 + 0.6 * Math.max(0, (tech.isEnergyHealth ? m.maxEnergy + m.energy : m.maxHealth - m.health))
         },
         maxCount: 1,
         count: 0,
@@ -7749,7 +7749,7 @@ const tech = {
     {
 
         // descriptionFunction() {
-        //     return `use ${powerUps.orb.research(2)}<br><span style = 'font-size:94%;'><strong>1.01x</strong> <strong class='color-d'>damage</strong> per <strong class='color-f'>energy</strong> below <strong>maximum</strong> <em style ="float: right;">(${(1 + Math.max(0, m.maxEnergy - m.energy)).toFixed(2)}x)</em></span>`
+        //     return `use ${powerUps.orb.research(2)}<br><span style = 'font-size:94%;'><strong>1.01x</strong> <strong class='color-d'>damage</strong> per <strong class='color-f'>energy</strong> below <strong>maximum</strong> <em style ="float: right;">(${(1 + Math.max(0, m.maxEnergy + m.energy)).toFixed(2)}x)</em></span>`
         // },
         name: "electronegativity",
         descriptionFunction() {
