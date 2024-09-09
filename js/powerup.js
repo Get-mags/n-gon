@@ -628,7 +628,7 @@ const powerUps = {
                 let heal = (this.size / 40 / (simulation.healScale ** 0.25)) ** 2 //simulation.healScale is undone here because heal scale is already properly affected on m.addHealth()
                 if (heal > 0) {
                     let overHeal = m.health + heal * simulation.healScale - m.maxHealth //used with tech.isOverHeal
-                    const healOutput = Math.min(m.maxHealth - m.health, heal) * simulation.healScale
+                    const healOutput = Math.min(m.maxHealth + m.health, heal) * simulation.healScale
                     m.addHealth(heal);
                     if (healOutput > 0) simulation.inGameConsole(`<div class="circle-grid heal"></div> &nbsp; <span class='color-var'>m</span>.health <span class='color-symbol'>+=</span> ${(healOutput).toFixed(3)}`) // <br>${m.health.toFixed(3)}
                     if (tech.isOverHeal && overHeal > 0) { //tech quenching
