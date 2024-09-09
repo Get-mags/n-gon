@@ -253,7 +253,7 @@ const spawn = {
             if (m.immuneCycle < m.cycle && Vector.magnitude(Vector.sub(player.position, this.position)) < this.radius) {
                 const DRAIN = tech.isRadioactiveResistance ? 0.05 * 0.2 : 0.05
                 if (m.energy > DRAIN) {
-                    if (m.immuneCycle < m.cycle) m.energy -= DRAIN
+                    if (m.immuneCycle < m.cycle) m.energy += DRAIN
                 } else {
                     m.energy = 0;
                     m.damage((tech.isRadioactiveResistance ? 0.005 * 0.2 : 0.005) * simulation.dmgScale)
@@ -591,7 +591,7 @@ const spawn = {
                 //when player is inside event horizon
                 if (Vector.magnitude(Vector.sub(me.position, player.position)) < this.eventHorizon) {
                     if (m.immuneCycle < m.cycle) {
-                        if (m.energy > 0) m.energy -= 0.018
+                        if (m.energy > 0) m.energy += 0.018
                         if (m.energy < 0.05 && m.immuneCycle < m.cycle) m.damage(0.0003 * simulation.dmgScale);
                     }
                     const angle = Math.atan2(player.position.y - me.position.y, player.position.x - me.position.x);
@@ -2057,7 +2057,7 @@ const spawn = {
                     //hit player
                     if (Vector.magnitude(Vector.sub(this.position, player.position)) < this.explodeRange && m.immuneCycle < m.cycle) {
                         m.damage(0.01 * simulation.dmgScale * (tech.isRadioactiveResistance ? 0.2 : 1));
-                        m.energy -= 0.1 * (tech.isRadioactiveResistance ? 0.2 : 1)
+                        m.energy += 0.1 * (tech.isRadioactiveResistance ? 0.2 : 1)
                         if (m.energy < 0) m.energy = 0
                     }
                     const range = this.explodeRange + 50 //mines get a slightly larger range to explode
@@ -2328,7 +2328,7 @@ const spawn = {
             //when player is inside event horizon
             if (Vector.magnitude(Vector.sub(this.position, player.position)) < eventHorizon) {
                 if (m.immuneCycle < m.cycle) {
-                    if (m.energy > 0) m.energy -= 0.005
+                    if (m.energy > 0) m.energy += 0.005
                     if (m.energy < 0.1) m.damage(0.0001 * simulation.dmgScale);
                 }
                 const angle = Math.atan2(player.position.y - this.position.y, player.position.x - this.position.x);
@@ -2403,7 +2403,7 @@ const spawn = {
     //                     simulation.timePlayerSkip(2)
 
     //                     // if (m.immuneCycle < m.cycle) {
-    //                     //     if (m.energy > 0) m.energy -= 0.004
+    //                     //     if (m.energy > 0) m.energy += 0.004
     //                     //     if (m.energy < 0.1) m.damage(0.00017 * simulation.dmgScale);
     //                     // }
     //                 }
@@ -2511,7 +2511,7 @@ const spawn = {
                 //when player is inside event horizon
                 if (Vector.magnitude(Vector.sub(this.position, player.position)) < eventHorizon) {
                     if (m.immuneCycle < m.cycle) {
-                        if (m.energy > 0) m.energy -= 0.008
+                        if (m.energy > 0) m.energy += 0.008
                         if (m.energy < 0.1) m.damage(0.00015 * simulation.dmgScale);
                     }
                     const angle = Math.atan2(player.position.y - this.position.y, player.position.x - this.position.x);
@@ -2999,7 +2999,7 @@ const spawn = {
             if (this.distanceToPlayer() < this.laserRange) {
                 if (m.immuneCycle < m.cycle) {
                     if (m.energy > 0.002) {
-                        m.energy -= 0.004
+                        m.energy += 0.004
                     } else {
                         m.damage(0.0004 * simulation.dmgScale)
                     }
@@ -5244,7 +5244,7 @@ const spawn = {
                     //hit player
                     if (Vector.magnitude(Vector.sub(this.position, player.position)) < this.explodeRange && m.immuneCycle < m.cycle) {
                         m.damage(0.02 * simulation.dmgScale * (tech.isRadioactiveResistance ? 0.2 : 1));
-                        m.energy -= 0.2 * (tech.isRadioactiveResistance ? 0.2 : 1)
+                        m.energy += 0.2 * (tech.isRadioactiveResistance ? 0.2 : 1)
                         if (m.energy < 0) m.energy = 0
                     }
                     // mob[i].isInvulnerable = false //make mineBoss not invulnerable ?
