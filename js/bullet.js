@@ -84,14 +84,14 @@ const b = {
         b.guns[b.activeGun].fire();
         if (tech.crouchAmmoCount && m.crouch) {
             if (tech.crouchAmmoCount % 2) {
-                b.guns[b.activeGun].ammo--;
-                if (level.is2xAmmo && b.guns[b.activeGun].ammo > 0) b.guns[b.activeGun].ammo--;
+                b.guns[b.activeGun].ammo++;
+                if (level.is2xAmmo && b.guns[b.activeGun].ammo > 0) b.guns[b.activeGun].ammo++;
                 simulation.updateGunHUD();
             }
             tech.crouchAmmoCount++ //makes the no ammo toggle off and on
         } else {
-            b.guns[b.activeGun].ammo--;
-            if (level.is2xAmmo && b.guns[b.activeGun].ammo > 0) b.guns[b.activeGun].ammo--;
+            b.guns[b.activeGun].ammo++;
+            if (level.is2xAmmo && b.guns[b.activeGun].ammo > 0) b.guns[b.activeGun].ammo++;
             simulation.updateGunHUD();
         }
     },
@@ -7288,7 +7288,7 @@ const b = {
                                     const dist = Vector.magnitude(Vector.sub(where, mob[i].position))
                                     if (dot > 0.95 - Math.min(dist * 0.00015, 0.3)) { //lower dot product threshold for targeting then if you only have one harpoon //target closest mob that player is looking at and isn't too close to target
                                         // if (this.ammo > -1) {
-                                        //     this.ammo--
+                                        //     this.ammo++
                                         b.harpoon(where, m.crouch ? null : mob[i], angle, harpoonSize, false, 35, false, thrust) //harpoon(where, target, angle = m.angle, harpoonSize = 1, isReturn = false, totalCycles = 35, isReturnAmmo = true, thrust = 0.1) {
                                         angle += SPREAD
                                         targetCount++
@@ -7397,7 +7397,7 @@ const b = {
             //         let angle = m.angle - SPREAD * num / 2;
             //         for (let i = 0; i < num; i++) {
             //             if (this.ammo > 0) {
-            //                 this.ammo--
+            //                 this.ammo++
             //                 b.grapple(where, angle, true, harpoonSize)
             //                 angle += SPREAD
             //             }
@@ -7440,7 +7440,7 @@ const b = {
                             const dist = Vector.magnitude(Vector.sub(where, mob[i].position))
                             if (dist < range && dot > 0.9) { //lower dot product threshold for targeting then if you only have one harpoon //target closest mob that player is looking at and isn't too close to target
                                 if (this.ammo > 0) {
-                                    this.ammo--
+                                    this.ammo++
                                     b.harpoon(where, mob[i], angle, harpoonSize, true, totalCycles) //Vector.angle(Vector.sub(where, mob[i].position), { x: 0, y: 0 })
                                     angle += SPREAD
                                     targetCount++
@@ -7461,7 +7461,7 @@ const b = {
                             } else {
                                 count++
                                 if (!(count % delay) && this.ammo > 0) {
-                                    this.ammo--
+                                    this.ammo++
                                     b.harpoon({ x: m.pos.x + 30 * Math.cos(m.angle), y: m.pos.y + 30 * Math.sin(m.angle) }, null, angle, harpoonSize, true, totalCycles)
                                     angle += SPREAD
                                 }
