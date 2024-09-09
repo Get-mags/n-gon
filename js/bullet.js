@@ -401,7 +401,7 @@ const b = {
             //player damage
             if (Vector.magnitude(Vector.sub(where, player.position)) < radius) {
                 const DRAIN = (tech.isExplosionHarm ? 0.6 : 0.45) * (tech.isRadioactiveResistance ? 0.2 : 1)
-                if (m.immuneCycle < m.cycle) m.energy -= DRAIN
+                if (m.immuneCycle < m.cycle) m.energy += DRAIN
                 if (m.energy < 0) {
                     m.energy = 0
                     if (simulation.dmgScale) m.damage(tech.radioactiveDamage * 0.03 * (tech.isRadioactiveResistance ? 0.2 : 1));
@@ -452,7 +452,7 @@ const b = {
                         const harm = tech.isExplosionHarm ? 0.067 : 0.05
                         if (tech.isImmuneExplosion && m.energy > 0.25) {
                             // const mitigate = Math.min(1, Math.max(1 - m.energy * 0.5, 0))
-                            m.energy -= 0.25
+                            m.energy += 0.25
                             // m.damage(0.01 * harm); //remove 99% of the damage  1-0.99
                             knock = Vector.mult(Vector.normalise(sub), -0.6 * player.mass * Math.max(0, Math.min(0.15 - 0.002 * player.speed, 0.15)));
                             player.force.x = knock.x; // not +=  so crazy forces can't build up with MIRV
@@ -1034,7 +1034,7 @@ const b = {
                     if (Vector.magnitude(Vector.sub(player.position, this.position)) < this.damageRadius) {
                         const DRAIN = (tech.isRadioactiveResistance ? 0.0025 * 0.2 : 0.0025)
                         if (m.energy > DRAIN) {
-                            if (m.immuneCycle < m.cycle) m.energy -= DRAIN
+                            if (m.immuneCycle < m.cycle) m.energy += DRAIN
                         } else {
                             m.energy = 0;
                             if (simulation.dmgScale) m.damage((tech.isRadioactiveResistance ? 0.00016 * 0.2 : 0.00016) * tech.radioactiveDamage) //0.00015
@@ -1524,7 +1524,7 @@ const b = {
                             this.pickUpTarget = null
                         }
                     } else {
-                        if (m.energy > this.drain) m.energy -= this.drain
+                        if (m.energy > this.drain) m.energy += this.drain
                         const sub = Vector.sub(this.position, m.pos)
                         const rangeScale = 1 + 0.000003 * Vector.magnitude(sub)  //return faster when far from player
                         const returnForce = Vector.mult(Vector.normalise(sub), rangeScale * this.thrustMag * this.mass)
@@ -1680,7 +1680,7 @@ const b = {
 
                                     player.force.x += pull.x
                                     player.force.y += pull.y
-                                    if (dist > 500) m.energy -= this.drain
+                                    if (dist > 500) m.energy += this.drain
                                 } else {
                                     Matter.Sleeping.set(this, false)
                                     this.retract()
@@ -1888,7 +1888,7 @@ const b = {
                     const sub = Vector.sub(this.position, m.pos)
                     const rangeScale = 1 + 0.000001 * Vector.magnitude(sub) * Vector.magnitude(sub) //return faster when far from player
                     const returnForce = Vector.mult(Vector.normalise(sub), rangeScale * thrust * this.mass)
-                    if (m.energy > this.drain) m.energy -= this.drain
+                    if (m.energy > this.drain) m.energy += this.drain
                     if (m.energy < 0.05) {
                         this.force.x -= returnForce.x * 0.15
                         this.force.y -= returnForce.y * 0.15
@@ -2098,7 +2098,7 @@ const b = {
     extruder() {
         const DRAIN = 0.0012
         if (m.energy > DRAIN && b.canExtruderFire) {
-            m.energy -= DRAIN
+            m.energy += DRAIN
             if (m.energy < 0) {
                 m.fieldCDcycle = m.cycle + 120;
                 m.energy = 0;
@@ -2180,7 +2180,7 @@ const b = {
     plasma() {
         const DRAIN = 0.00075
         if (m.energy > DRAIN) {
-            m.energy -= DRAIN;
+            m.energy += DRAIN;
             if (m.energy < 0) {
                 m.fieldCDcycle = m.cycle + 120;
                 m.energy = 0;
@@ -2463,7 +2463,7 @@ const b = {
             laserSpin() {
                 //drain energy
                 if (m.energy > this.drain) {
-                    m.energy -= this.drain
+                    m.energy += this.drain
                     if (this.angularSpeed < 0.05) this.torque += this.inertia * this.torqueMagnitude //spin
 
                     //fire lasers
@@ -3191,7 +3191,7 @@ const b = {
                             return distA < distB ? a : b
                         })
                         if (found && m.energy > 0.041) {
-                            m.energy -= 0.04
+                            m.energy += 0.04
                             //remove the body and spawn a new drone
                             Composite.remove(engine.world, found)
                             body.splice(body.indexOf(found), 1)
@@ -3438,7 +3438,7 @@ const b = {
                             return distA < distB ? a : b
                         })
                         if (found && m.energy > 0.091) {
-                            m.energy -= 0.09
+                            m.energy += 0.09
                             //remove the body and spawn a new drone
                             Composite.remove(engine.world, found)
                             body.splice(body.indexOf(found), 1)
@@ -3481,7 +3481,7 @@ const b = {
                 if (Vector.magnitude(Vector.sub(player.position, this.position)) < this.radioRadius) {
                     const DRAIN = tech.isRadioactiveResistance ? 0.001 : 0.004
                     if (m.energy > DRAIN) {
-                        if (m.immuneCycle < m.cycle) m.energy -= DRAIN
+                        if (m.immuneCycle < m.cycle) m.energy += DRAIN
                     } else {
                         m.energy = 0;
                         if (simulation.dmgScale) m.damage((tech.isRadioactiveResistance ? 0.00004 : 0.0002) * tech.radioactiveDamage) //0.00015
@@ -3663,7 +3663,7 @@ const b = {
                 this.force.y += this.mass * gravity;;
                 if (Matter.Query.collides(this, [player]).length) {
                     this.endCycle = 0
-                    // m.energy -= 0.04
+                    // m.energy += 0.04
                     // if (m.energy < 0) m.energy = 0
                     // simulation.drawList.push({ //add dmg to draw queue
                     //     x: this.position.x,
@@ -5189,7 +5189,7 @@ const b = {
                 }
                 //hit target with laser
                 if (this.lockedOn && this.lockedOn.alive && m.energy > this.drainThreshold) {
-                    m.energy -= this.drain
+                    m.energy += this.drain
                     this.laser();
                     // b.laser(this.vertices[0], this.lockedOn.position, m.dmgScale * this.laserDamage * tech.laserDamage, tech.laserReflections, false, 0.4) //tech.laserDamage = 0.16
                 }
@@ -5443,7 +5443,7 @@ const b = {
                     const DIST = Vector.magnitude(sub);
                     const unit = Vector.normalise(sub)
                     if (DIST < tech.isPlasmaRange * 450 && m.energy > this.drainThreshold) {
-                        m.energy -= 0.001
+                        m.energy += 0.001
                         //calculate laser collision
                         let best;
                         let range = tech.isPlasmaRange * (120 + 300 * Math.sqrt(Math.random()))
@@ -5941,7 +5941,7 @@ const b = {
                     if (m.energy < 0.01) {
                         m.fireCDcycle = m.cycle + 60; // cool down
                     } else {
-                        m.energy -= 0.01
+                        m.energy += 0.01
                     }
                 }
             },
@@ -7345,7 +7345,7 @@ const b = {
 
 
                         this.charge = 1 - smoothRate + this.charge * smoothRate
-                        if (m.energy > DRAIN) m.energy -= DRAIN
+                        if (m.energy > DRAIN) m.energy += DRAIN
 
                         //draw magnetic field
                         const X = m.pos.x
@@ -7629,7 +7629,7 @@ const b = {
                     this.fire = () => {
                         const drain = Math.min(0.9 * m.maxEnergy, 0.01 * (tech.isCapacitor ? 10 : 1) / b.fireCDscale)
                         if (m.energy > drain && this.charge < 50 * m.maxEnergy) {
-                            m.energy -= drain
+                            m.energy += drain
                             this.charge += drain * 100
                         }
                     }
@@ -7712,7 +7712,7 @@ const b = {
                     m.fireCDcycle = m.cycle + 100; // cool down if out of energy
                 } else {
                     m.fireCDcycle = m.cycle
-                    m.energy -= drain
+                    m.energy += drain
                     const where = {
                         x: m.pos.x + 20 * Math.cos(m.angle),
                         y: m.pos.y + 20 * Math.sin(m.angle)
@@ -7730,7 +7730,7 @@ const b = {
                     m.fireCDcycle = m.cycle + 100; // cool down if out of energy
                 } else {
                     m.fireCDcycle = m.cycle
-                    m.energy -= drain
+                    m.energy += drain
                     // const divergence = m.crouch ? 0.15 : 0.2
                     // const scale = Math.pow(0.9, tech.beamSplitter)
                     // const pushScale = scale * scale
@@ -7752,7 +7752,7 @@ const b = {
                     m.fireCDcycle = m.cycle + 100; // cool down if out of energy
                 } else {
                     m.fireCDcycle = m.cycle
-                    m.energy -= drain
+                    m.energy += drain
                     const range = {
                         x: 5000 * Math.cos(m.angle),
                         y: 5000 * Math.sin(m.angle)
@@ -7825,7 +7825,7 @@ const b = {
                     m.fireCDcycle = m.cycle + 100; // cool down if out of energy
                 } else {
                     m.fireCDcycle = m.cycle
-                    m.energy -= drain
+                    m.energy += drain
                     const dmg = tech.laserDamage / b.fireCDscale * this.lensDamage
                     const spacing = Math.ceil(23 - tech.historyLaser)
                     ctx.beginPath();
