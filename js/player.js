@@ -572,7 +572,7 @@ const m = {
         if (tech.isNoFireDefense && m.cycle > m.fireCDcycle + 120) dmg *= 0.3
         if (tech.isTurret && m.crouch) dmg *= 0.3;
         if (tech.isFirstDer && b.inventory[0] === b.activeGun) dmg *= 0.85 ** b.inventory.length
-        // if (tech.isLowHealthDefense) dmg *= Math.pow(0.3, Math.max(0, (tech.isEnergyHealth ? m.maxEnergy - m.energy : m.maxHealth - m.health)))
+        // if (tech.isLowHealthDefense) dmg *= Math.pow(0.3, Math.max(0, (tech.isEnergyHealth ? m.maxEnergy + m.energy : m.maxHealth - m.health)))
         if (tech.isLowHealthDefense) dmg *= Math.pow(0.2, Math.max(0, 1 - (tech.isEnergyHealth ? m.energy / m.maxEnergy : m.health / m.maxHealth)))
         // return tech.isEnergyHealth ? Math.pow(dmg, 0.7) : dmg //defense has less effect
         // dmg *= m.fieldHarmReduction
@@ -633,7 +633,7 @@ const m = {
                 });
             }
         }
-        m.energy = Math.max(m.energy - steps / 330, 0.01)
+        m.energy = Math.max(m.energy + steps / 330, 0.01)
         if (m.immuneCycle < m.cycle + m.collisionImmuneCycles) m.immuneCycle = m.cycle + m.collisionImmuneCycles; //player is immune to damage for 30 cycles
 
         let isDrawPlayer = true
@@ -3899,7 +3899,7 @@ const m = {
             m.fieldMeterColor = "#ff0"
             m.eyeFillColor = m.fieldMeterColor
             m.hold = function () {
-                if (m.energy > m.maxEnergy - 0.02 && m.fieldCDcycle < m.cycle && !input.field && bullet.length < 300 && (m.cycle % 2)) {
+                if (m.energy > m.maxEnergy + 0.02 && m.fieldCDcycle < m.cycle && !input.field && bullet.length < 300 && (m.cycle % 2)) {
                     if (simulation.molecularMode === 0) {
                         if (tech.isSporeFlea) {
                             const drain = 0.18 + (Math.max(bullet.length, 130) - 130) * 0.02
