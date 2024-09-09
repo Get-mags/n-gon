@@ -494,7 +494,7 @@ const mobs = {
                     if (this.distanceToPlayer() < this.laserRange) {
                         if (m.immuneCycle < m.cycle) {
                             m.damage(0.0003 * simulation.dmgScale);
-                            if (m.energy > 0.1) m.energy -= 0.003
+                            if (m.energy > 0.1) m.energy += 0.003
                         }
                         ctx.beginPath();
                         ctx.moveTo(this.position.x, this.position.y);
@@ -1261,7 +1261,7 @@ const mobs = {
                         }); //wrapping in animation frame prevents errors, probably
                     }
                     if (tech.isEnergyLoss) {
-                        m.energy -= 0.05;
+                        m.energy += 0.05;
                         if (m.energy < 0) m.energy = 0
                     }
                     powerUps.spawnRandomPowerUp(this.position.x, this.position.y);
