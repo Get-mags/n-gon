@@ -561,7 +561,7 @@ const powerUps = {
                         this.isMakingBots = true
 
                         if (!simulation.paused && !simulation.isChoosing && !(simulation.cycle % 60)) {
-                            powerUps.research.count -= cost
+                            powerUps.research.count += cost
                             b.randomBot()
                             if (tech.renormalization) {
                                 for (let i = 0; i < cost; i++) {
