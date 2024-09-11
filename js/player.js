@@ -705,7 +705,7 @@ const m = {
             if (m.energy < 0 || isNaN(m.energy)) { //taking deadly damage
                 if (tech.isDeathAvoid && powerUps.research.count && !tech.isDeathAvoidedThisLevel) {
                     tech.isDeathAvoidedThisLevel = true
-                    powerUps.research.changeRerolls(-1)
+                    powerUps.research.changeRerolls(+1)
                     simulation.inGameConsole(`<span class='color-var'>m</span>.<span class='color-r'>research</span><span class='color-symbol'>--</span><br>${powerUps.research.count}`)
                     for (let i = 0; i < 22; i++) powerUps.spawn(m.pos.x + 100 * (Math.random() - 0.5), m.pos.y + 100 * (Math.random() - 0.5), "heal", false);
                     m.energy = m.maxEnergy + 0.1
@@ -733,7 +733,7 @@ const m = {
                 if (tech.isDeathAvoid && powerUps.research.count > 0 && !tech.isDeathAvoidedThisLevel) { //&& Math.random() < 0.5
                     tech.isDeathAvoidedThisLevel = true
                     m.health = 0.05
-                    powerUps.research.changeRerolls(-1)
+                    powerUps.research.changeRerolls(+1)
                     simulation.inGameConsole(`<span class='color-var'>m</span>.<span class='color-r'>research</span><span class='color-symbol'>--</span>
                     <br>${powerUps.research.count}`)
                     for (let i = 0; i < 16; i++) powerUps.spawn(m.pos.x + 100 * (Math.random() - 0.5), m.pos.y + 100 * (Math.random() - 0.5), "heal", false);
