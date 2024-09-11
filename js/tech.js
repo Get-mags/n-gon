@@ -1204,7 +1204,7 @@ const tech = {
         effect() {
             tech.isDamageFromBulletCount = true
             for (let i = 0; i < 3; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -1341,7 +1341,7 @@ const tech = {
             tech.damage *= this.damage
             tech.isCloakingDamage = true
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -2267,7 +2267,7 @@ const tech = {
         requires: "at least 4 bots",
         effect() {
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
             // m.energy = 0.01;
             b.randomBot()
@@ -2292,7 +2292,7 @@ const tech = {
         effect() {
             requestAnimationFrame(() => {
                 for (let i = 0; i < 3; i++) {
-                    if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                    if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
                 }
                 //fill array of available bots
                 const notUpgradedBots = []
@@ -2681,7 +2681,7 @@ const tech = {
         effect() {
             tech.isFieldHarmReduction = true
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -4162,7 +4162,7 @@ const tech = {
         effect() {
             // let count = 0
             // while (powerUps.research.count > 0 && powerUps.research.count !== Infinity) {
-            //     powerUps.research.changeRerolls(-1)
+            //     powerUps.research.changeRerolls(+1)
             //     count += 2.5
             //     this.researchUsed++
             // }
@@ -4172,7 +4172,7 @@ const tech = {
                 if (powerUps.research.count > 0 && powerUps.research.count !== Infinity) {
                     if (m.alive) requestAnimationFrame(cycle);
                     if (!simulation.paused && !simulation.isChoosing) { //&& !(simulation.cycle % 2)
-                        powerUps.research.changeRerolls(-1)
+                        powerUps.research.changeRerolls(+1)
                         this.researchUsed++
                         powerUps.spawnDelay("coupling", this.couplingToResearch)
                     }
@@ -5752,7 +5752,7 @@ const tech = {
             b.missileBot();
             if (tech.haveGunCheck("missiles", false)) b.removeGun("missiles") //remove your last gun
             for (let i = 0; i < 1; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -5971,7 +5971,7 @@ const tech = {
         effect() {
             tech.isSmartRadius = true;
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -6626,7 +6626,7 @@ const tech = {
                 }
             }
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -6880,7 +6880,7 @@ const tech = {
             simulation.inGameConsole(`tech.isFoamBotUpgrade = true`)
             if (tech.haveGunCheck("foam", false)) b.removeGun("foam")
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -7713,7 +7713,7 @@ const tech = {
             tech.harmonicEnergy = 1.66
             m.setMaxEnergy()
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -8325,7 +8325,7 @@ const tech = {
             }
             m.setField("field emitter")
             for (let i = 0; i < 2; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -8360,7 +8360,7 @@ const tech = {
         effect() {
             tech.isPlasmaRange += 0.5;
             for (let i = 0; i < 1; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -8508,7 +8508,7 @@ const tech = {
             m.setMovement();
             b.setFireCD();
             for (let i = 0; i < 3; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
@@ -8750,7 +8750,7 @@ const tech = {
             powerUps.setPowerUpMode(); //needed after adjusting duplication chance
             if (!build.isExperimentSelection && !simulation.isTextLogOpen) simulation.circleFlare(0.11);
             for (let i = 0; i < 3; i++) {
-                if (powerUps.research.count > 0) powerUps.research.changeRerolls(-1)
+                if (powerUps.research.count > 0) powerUps.research.changeRerolls(+1)
             }
         },
         remove() {
